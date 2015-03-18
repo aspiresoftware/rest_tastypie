@@ -1,5 +1,5 @@
 """
-Django settings for smart_phone_tracker project.
+Django settings for rest_tastypie project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-TASTYPIE_SWAGGER_API_MODULE = 'smart_phone_tracker.urls.v1_api'
+TASTYPIE_SWAGGER_API_MODULE = 'rest_tastypie.urls.v1_api'
 
 # Application definition
 
@@ -50,13 +50,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'smart_phone_tracker.middleware.CorsMiddleware',
+    'rest_tastypie.middleware.CorsMiddleware',
 
 )
 
-ROOT_URLCONF = 'smart_phone_tracker.urls'
+ROOT_URLCONF = 'rest_tastypie.urls'
 
-WSGI_APPLICATION = 'smart_phone_tracker.wsgi.application'
+WSGI_APPLICATION = 'rest_tastypie.wsgi.application'
 
 
 # Database
@@ -65,7 +65,7 @@ WSGI_APPLICATION = 'smart_phone_tracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'smart_phone_tracker',
+        'NAME': 'rest_tastypie',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
@@ -104,7 +104,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'smart_phone_tracker.log',
+            'filename': 'rest_tastypie.log',
             'formatter': 'verbose'
         },
     },
