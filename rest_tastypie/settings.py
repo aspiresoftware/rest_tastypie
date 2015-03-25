@@ -22,6 +22,8 @@ SECRET_KEY = '_&@^f*t9q$jdg1b8_q$gbdgvi_t!etfyl!1n_5cr^tfcd2)&@9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -73,16 +75,49 @@ DATABASES = {
     }
 }
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'URL': 'http://localhost:8000',
+        'TIMEOUT': 60 * 5,
+        'INCLUDE_SPELLING': True,
+        'BATCH_SIZE': 100,
+        'EXCLUDED_INDEXES': ['thirdpartyapp.search_indexes.BarIndex'],
+    },
+    'autocomplete': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': '/home/search/whoosh_index',
+        'STORAGE': 'file',
+        'POST_LIMIT': 128 * 1024 * 1024,
+        'INCLUDE_SPELLING': True,
+        'BATCH_SIZE': 100,
+        'EXCLUDED_INDEXES': ['thirdpartyapp.search_indexes.BarIndex'],
+    },
+    'slave': {
+        'ENGINE': 'xapian_backend.XapianEngine',
+        'PATH': '/home/search/xapian_index',
+        'INCLUDE_SPELLING': True,
+        'BATCH_SIZE': 100,
+        'EXCLUDED_INDEXES': ['thirdpartyapp.search_indexes.BarIndex'],
+    },
+    'db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'EXCLUDED_INDEXES': ['thirdpartyapp.search_indexes.BarIndex'],
+    }
+}
+
+
+
 #Cache
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': 100
+        'TIMEOUT': 0
     },
     'resources': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': 60
+        'TIMEOUT': 0
     }
 }
 

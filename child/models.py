@@ -1,7 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
+import datetime
 from django.core.urlresolvers import reverse
 
 class Child(models.Model):
+	user = models.ForeignKey(User)
 	first_name = models.CharField(max_length=45)
 	last_name = models.CharField(max_length=45)
 	email = models.EmailField()
@@ -10,5 +13,8 @@ class Child(models.Model):
 	def __unicode__(self):
 		return self.first_name
 
-	def get_absolute_url(self):
-		return reverse('child_edit', kwargs={'pk': self.pk})
+class UserLogin(models.Model):
+	user = models.ForeignKey(User)
+	access_token = models.CharField(max_length=100)
+	refresh_token = models.CharField(max_length=100)
+	expire_date = models.DateTimeField()
